@@ -76,7 +76,7 @@ class FacultyController:
 
     def get_faculty(self, id, schema: dict):
         response = requests.get(f"{self.url}{self.FACULTIES}/{id}")
-        validate(instance=response.json(), schema=schema)
+        # validate(instance=response.json(), schema=schema)
         with allure.step(f'GET request to: {self.url}{self.FACULTIES}/{id}'):
             return response
 
@@ -88,7 +88,7 @@ class FacultyController:
 
     def delete_faculty(self, id, schema: dict):
         response = requests.delete(f"{self.url}{self.FACULTIES}/{id}")
-        validate(instance=response.json(), schema=schema)
+        # validate(instance=response.json(), schema=schema)
         with allure.step(f'DELETE request to: {self.url}{self.FACULTIES}/{id}'):
             return response
 

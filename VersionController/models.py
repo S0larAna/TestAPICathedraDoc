@@ -12,6 +12,7 @@ faculty_correct_payload = {
 
 faculty_words = ["факультет", "биологии", "философии", "астрономии", "математики"]
 
+
 class CreateVersion:
     @staticmethod
     def random():
@@ -19,7 +20,8 @@ class CreateVersion:
         versionNumber = str(random.randint(0, 10000))
         academicYear = str(random.randint(2018, 2023))
         umu = bool(random.getrandbits(1))
-        return {"date":date, "versionNumber":versionNumber, "academicYear":academicYear, "umu":umu}
+        return {"date": date, "versionNumber": versionNumber, "academicYear": academicYear, "umu": umu}
+
 
 class CreateFaculty:
     @staticmethod
@@ -37,15 +39,22 @@ class CreateFaculty:
         return {"name": name, "shortName": shortName}
 
     @staticmethod
-    def random_special_chars():
+    def random_incorrect_special_chars():
         char_count = random.randint(1, 20)
         name = ''.join([random.choice('!@#$%^&*()_') for n in range(char_count)])
         shortName = ''.join([random.choice('!@#$%^&*()_') for n in range(char_count)])
         return {"name": name, "shortName": shortName}
 
     @staticmethod
-    def empty():
-        return {"name": "", "shortName": ""}
+    def empty_shortName():
+        word_count = random.randint(1, 5)
+        name = faker.sentence(nb_words=word_count, ext_word_list=faculty_words)
+        return {"name": name, "shortName": ""}
+
+    @staticmethod
+    def empty_name():
+        shortName = faker.word()
+        return {"name": "", "shortName": shortName}
 
     @staticmethod
     def random_incorrect_numbers():
@@ -58,4 +67,11 @@ class CreateFaculty:
         word_count = random.randint(100, 10000)
         name = faker.sentence(nb_words=word_count, ext_word_list=faculty_words)
         shortName = faker.word()
+        return {"name": name, "shortName": shortName}
+
+    @staticmethod
+    def random_unicode():
+        char_count = random.randint(1, 20)
+        name = ''.join([random.choice('ÆĆĆĆÆĕŵĠŒ') for n in range(char_count)])
+        shortName = ''.join([random.choice('ÆĆĆĆÆĕŵĠŒ') for n in range(char_count)])
         return {"name": name, "shortName": shortName}
