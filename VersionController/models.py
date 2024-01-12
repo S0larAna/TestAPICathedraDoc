@@ -3,6 +3,7 @@ import random
 from datetime import datetime
 
 faker = Faker("ru_RU")
+fakerEng = Faker()
 
 faculty_correct_payload = {
     "name": "Факультет компьютерных технологий и прикладной математики",
@@ -26,6 +27,20 @@ class CreateFaculty:
         word_count = random.randint(1, 5)
         name = faker.sentence(nb_words=word_count, ext_word_list=faculty_words)
         shortName = faker.word()
+        return {"name": name, "shortName": shortName}
+
+    @staticmethod
+    def random_eng():
+        word_count = random.randint(1, 5)
+        name = fakerEng.sentence(nb_words=word_count, ext_word_list=faculty_words)
+        shortName = fakerEng.word()
+        return {"name": name, "shortName": shortName}
+
+    @staticmethod
+    def random_special_chars():
+        char_count = random.randint(1, 20)
+        name = ''.join([random.choice('!@#$%^&*()_') for n in range(char_count)])
+        shortName = ''.join([random.choice('!@#$%^&*()_') for n in range(char_count)])
         return {"name": name, "shortName": shortName}
 
     @staticmethod
