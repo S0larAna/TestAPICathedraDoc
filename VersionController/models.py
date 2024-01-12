@@ -12,6 +12,8 @@ faculty_correct_payload = {
 
 faculty_words = ["факультет", "биологии", "философии", "астрономии", "математики"]
 
+department_words = ["Философии", "Астрономии", "Психологии", "Математики", "Компьютерных технологий"]
+
 
 class CreateVersion:
     @staticmethod
@@ -21,6 +23,17 @@ class CreateVersion:
         academicYear = str(random.randint(2018, 2023))
         umu = bool(random.getrandbits(1))
         return {"date": date, "versionNumber": versionNumber, "academicYear": academicYear, "umu": umu}
+
+class CreateDepartment:
+    @staticmethod
+    def random():
+        word_count = random.randint(1, 4)
+        number = str(random.randint(1, 10000))
+        name = faker.sentence(nb_words=word_count, ext_word_list=department_words)
+        shortName = faker.word()
+        academicYear = str(random.randint(2018, 2023))
+        umu = bool(random.getrandbits(1))
+        return {"number": number, "name": name, "shortName": shortName}
 
 
 class CreateFaculty:
@@ -64,7 +77,7 @@ class CreateFaculty:
 
     @staticmethod
     def random_long_name():
-        word_count = random.randint(100, 10000)
+        word_count = random.randint(10000, 100000000000)
         name = faker.sentence(nb_words=word_count, ext_word_list=faculty_words)
         shortName = faker.word()
         return {"name": name, "shortName": shortName}
